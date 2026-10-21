@@ -2,7 +2,8 @@
 import { onceADay } from './cache';
 
 const BASE = 'https://api.themoviedb.org/3';
-const KEY = process.env.REACT_APP_TMDB_KEY;          // มาจากไฟล์ .env
+//const KEY = process.env.REACT_APP_TMDB_KEY; 
+const KEY = process.env.REACT_APP_TMDB_KEY;        // มาจากไฟล์ .env
 export const IMG = 'https://image.tmdb.org/t/p/w342'; // ต้นทางรูปโปสเตอร์
 export const CACHE_KEY = 'moviehub.movies';          // ชื่อกล่องใน localStorage
 
@@ -49,7 +50,8 @@ export function toMovie(m, genreMap = {}) {
     titleTh: null,                                   // TMDB ให้ชื่อมาภาษาเดียวต่อ 1 request
     genre: m.genres?.[0]?.name ?? genreMap[m.genre_ids?.[0]] ?? null,   // รายละเอียดให้ชื่อ รายการให้รหัส
     year: m.release_date ? Number(m.release_date.slice(0, 4)) : null,
-    rating: m.vote_average ? Math.round(m.vote_average * 10) / 10 : null,
+    //rating: m.vote_average ? Math.round(m.vote_average * 10) / 10 : null,
+    rating: m.vote_average ? Number(m.vote_average.toFixed(1)) : null,
     detail: m.overview || 'ยังไม่มีเรื่องย่อภาษาไทย',
     poster: m.poster_path ? IMG + m.poster_path : null,
   };
